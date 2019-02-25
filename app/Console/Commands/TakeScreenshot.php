@@ -69,6 +69,7 @@ class TakeScreenshot extends Command
         // build the url
         $url = route('screenshot') . '?' . http_build_query($data);
 
+
         $process = new Process([
             env('GOOGLE_CHROME_PATH', 'google-chrome'), 
             '--no-sandbox', 
@@ -76,15 +77,33 @@ class TakeScreenshot extends Command
             '--disable-gpu', 
             '--hide-scrollbars', 
             '--window-size=800,450', 
-            $screenshot
-        ]);
-        $process->run();
+            '--virtual-time-budget=3000', 
+	    $screenshot,
+	    $url,
+    	]);
+
+
+	$process->run(function ($type, $buffer) {
+    		if (Process::ERR === $type) {
+        		echo 'ERR > '.$buffer;
+    		} else {
+        		echo 'OUT > '.$buffer;
+    		}
+	});
+
+	$process->wait();
+	$process->clearOutput();
+
+	$process = new Process(['chmod', '0660', $path]);
+	$process->run();
 
         // executes after the command finishes
         if (!$process->isSuccessful()) {
             $this->error('Screeshot was not taken');
             throw new ProcessFailedException($process);
-        }
+	}
+
+	$process->clearOutput();
 
 
         $this->info($process->getOutput());
