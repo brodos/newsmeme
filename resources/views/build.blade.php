@@ -2,25 +2,32 @@
 
 @section('content')
 
-    <div class="absolute pin-t pin-r mt-12 mr-12 text-right font-sans">
-        <a href="#sidebar" @click.prevent="toggleSidebar" class="inline-block no-underline px-8 py-4 uppercase font-semibold text-grey-dark shadow-md bg-white border rounded-lg border-grey-dark hover:border-blue-dark hover:shadow-lg hover:text-blue-dark">
-            Modifică
-            {{-- <svg class="fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="heroicon-ui" d="M9.3 8.7a1 1 0 0 1 1.4-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4-1.4l3.29-3.3-3.3-3.3z"/></svg> --}}
+    <div class="hidden lg:inline-block absolute pin-t pin-r mt-12 mr-12 text-right font-sans z-10">
+        <a href="#sidebar" @click.prevent="toggleSidebar" class="inline-block no-underline px-8 py-4 font-semibold text-grey-dark shadow-md 
+        bg-transparent border rounded-lg border-grey-dark hover:border-blue-dark hover:shadow-lg hover:text-blue-dark hover:bg-white text-sm leading-none flex items-center">
+            <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z"/></svg>
+            <span>Modifică</span>
+            
         </a>
     </div>
 
-    <div class="flex flex-row-reverse justify-between h-full pb-16" @click="hideSidebar">
+    <div class="flex flex-row-reverse justify-between h-full pb-16" @click.prevent="hideSidebar">
 
-        <div class="sidebar animate bg-white min-h-full w-128 shadow-lg z-20 fixed pin-t pin-r hidden bounceOutRight" @click.stop>
+        <div class="sidebar animate bg-white min-h-full w-full lg:w-128 shadow-lg z-20 fixed pin-t pin-r hidden bounceOutRight" @click.stop>
             <div class="head flex items-center border-b z-10 shadow">
                 <div class="p-6 border-r">
                     <a href="#" @click.prevent="toggleSidebar" class="text-grey hover:text-grey-darker leading-none">
                         <svg class="fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="heroicon-ui" d="M9.3 8.7a1 1 0 0 1 1.4-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4-1.4l3.29-3.3-3.3-3.3z"/></svg>
                     </a>
                 </div>
-                <div class="p-6 pr-12 flex-1 font-semibold uppercase text-grey-darker">Modifică</div>
+                <div class="hidden md:block p-6 pr-12 flex-1 font-semibold uppercase text-grey-darker">Modifică</div>
+                <div class="p-6 flex-1 text-right md:hidden">
+                    <a href="#" class="no-underline bg-blue-dark rounded-lg text-white text-sm font-semibold px-8 shadow-md py-4">Modifică</a>
+                </div>
             </div>
-            <div class="body p-10 overflow-y-scroll h-screen pb-32">
+            <div class="body p-6 md:p-10 overflow-y-scroll h-screen pb-24">
+                <form action="{{ route('compose') }}" method="post">
+                    <input type="submit" value="submit">
                 <div class="mb-4 flex w-full">
                     <div class="flex-1 mr-2">
                         <input class="w-full bg-grey-lighter focus:bg-indigo-lightest h-12 px-4 appearance-none outline-none" type="time" name="time" v-model="time">
@@ -31,22 +38,22 @@
                     </div>
                 </div>
                 <div class="mb-4">
-                    <textarea class="w-full rounded bg-grey-lighter focus:bg-indigo-lightest p-4 text-lg font-semibold outline-none appearance-none" name="title" id="title" rows="2" v-model="title"></textarea>
+                    <textarea class="w-full rounded bg-grey-lighter focus:bg-indigo-lightest p-4 md:text-lg font-semibold outline-none appearance-none" name="title" id="title" rows="2" v-model="title"></textarea>
                 </div>
                 <div class="mb-4">
-                    <textarea class="w-full bg-grey-lighter focus:bg-indigo-lightest p-4 font-semibold outline-none appearance-none" name="subtitle" id="subtitle" rows="2" v-model="subtitle"></textarea>
+                    <textarea class="w-full bg-grey-lighter focus:bg-indigo-lightest p-4 text-sm md:text-base font-semibold outline-none appearance-none" name="subtitle" id="subtitle" rows="2" v-model="subtitle"></textarea>
                 </div>
                 <div class="mb-8">
-                    <textarea class="w-full bg-grey-lighter focus:bg-indigo-lightest p-4 text-sm font-semibold outline-none appearance-none" name="subnews" id="subnews" rows="2" v-model="subnews"></textarea>
+                    <textarea class="w-full bg-grey-lighter focus:bg-indigo-lightest p-4 text-xs md:text-sm font-semibold outline-none appearance-none" name="subnews" id="subnews" rows="2" v-model="subnews"></textarea>
                 </div>
 
-                <div class="flex items-center justify-around pb-8 mb-8 border-b">
-                    <label class="font-semibold cursor-pointer  text-center flex items-center">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-around pb-8 mb-8 border-b">
+                    <label class="font-semibold cursor-pointer  text-center flex items-center mb-4 md:mb-0">
                         <input type="checkbox" name="live" v-model="isLive">
                         <span class="ml-2">In direct</span>
                     </label>
 
-                    <label class="font-semibold cursor-pointer  text-center flex items-center">
+                    <label class="font-semibold cursor-pointer  text-center flex items-center mb-4 md:mb-0">
                         <input type="checkbox" name="newsalert" v-model="isNewsAlert">
                         <span class="ml-2">News Alert</span>
                     </label>
@@ -59,49 +66,55 @@
                 </div>
 
                 <div class="flex items-center flex-wrap">
-                    <div class="w-1/2 overflow-hidden mb-4">
-                        <label class="block relative aspect-ratio-16/9 mr-2 border-4 border-transparent hover:border-blue cursor-pointer rounded-lg overflow-hidden" :class="{'border-green' : cover == '{{ asset('/images/digi_template.jpg') }}'}">
-                            <img class="absolute pin-t pin-l w-full h-full" src="{{ asset('/images/digi_template.jpg') }}" alt="">
-                            <input type="radio" name="cover" value="{{ asset('/images/digi_template.jpg') }}" v-model="cover" class="hidden" @change="updateCover">
+                    <div class="w-1/2  mb-4">
+                        <label class="block relative aspect-ratio-16/9 mr-2 border-4 border-transparent hover:border-blue cursor-pointer rounded-lg overflow-hidden" :class="{'border-blue' : cover == '{{ asset('/images/prelipceanu.jpg') }}'}">
+                            <img class="absolute pin-t pin-l w-full h-full" src="{{ asset('/images/prelipceanu.jpg') }}" alt="">
+                            <input type="radio" name="cover" value="{{ asset('/images/prelipceanu.jpg') }}" v-model="cover" class="hidden" @change="updateCover">
                         </label>
                     </div>
                     <div class="w-1/2  mb-4">
-                        <label class="block relative aspect-ratio-16/9 ml-2 border-4 border-transparent hover:border-blue cursor-pointer rounded-lg overflow-hidden" :class="{'border-green' : cover == '{{ asset('/images/ctp_digi.jpeg') }}'}">
+                        <label class="block relative aspect-ratio-16/9 ml-2 border-4 border-transparent hover:border-blue cursor-pointer rounded-lg overflow-hidden" :class="{'border-blue' : cover == '{{ asset('/images/ctp_digi.jpeg') }}'}">
                             <img class="absolute pin-t pin-l w-full h-full" src="{{ asset('/images/ctp_digi.jpeg') }}" alt="">
                             <input type="radio" name="cover" value="{{ asset('/images/ctp_digi.jpeg') }}" v-model="cover" class="hidden" @change="updateCover">
                         </label>
                     </div>
                     <div class="w-1/2 overflow-hidden mb-4">
-                        <label class="block relative aspect-ratio-16/9 mr-2 border-4 border-transparent hover:border-blue cursor-pointer rounded-lg overflow-hidden" :class="{'border-green' : cover == '{{ asset('/images/digi_news.jpg') }}'}">
-                            <img class="absolute pin-t pin-l w-full h-full" src="{{ asset('/images/digi_news.jpg') }}" alt="">
-                            <input type="radio" name="cover" value="{{ asset('/images/digi_news.jpg') }}" v-model="cover" class="hidden" @change="updateCover">
-                        </label>
-                    </div>
-                    <div class="w-1/2  mb-4">
-                        <label class="block relative aspect-ratio-16/9 ml-2 border-4 border-transparent hover:border-blue cursor-pointer rounded-lg overflow-hidden" :class="{'border-green' : cover == '{{ asset('/images/prelipceanu.jpg') }}'}">
-                            <img class="absolute pin-t pin-l w-full h-full" src="{{ asset('/images/prelipceanu.jpg') }}" alt="">
-                            <input type="radio" name="cover" value="{{ asset('/images/prelipceanu.jpg') }}" v-model="cover" class="hidden" @change="updateCover">
+                        <label class="block relative aspect-ratio-16/9 mr-2 border-4 border-transparent hover:border-blue cursor-pointer rounded-lg overflow-hidden" :class="{'border-blue' : cover == '{{ asset('/images/digi_template.jpg') }}'}">
+                            <img class="absolute pin-t pin-l w-full h-full" src="{{ asset('/images/digi_template.jpg') }}" alt="">
+                            <input type="radio" name="cover" value="{{ asset('/images/digi_template.jpg') }}" v-model="cover" class="hidden" @change="updateCover">
                         </label>
                     </div>
                 </div>
+        
+                </form>
             </div>
         </div>
 
-        <div class="main flex-1 animate">
+        <div class="main flex-1 animate z-0">
 
-            <h1 class="text-grey-darker text-center font-thin tracking-wide text-5xl py-16">
+            <h1 class="text-grey-darker text-center font-thin tracking-wide text-4xl md:text-5xl py-10 md:py-16">
                 {{ config('app.name', 'Laravel') }}
             </h1>
+            
+            <div class="w-full lg:hidden mx-auto p-6 md:p-10">
+                <div class="relative w-full aspect-ratio-16/9 shadow-lg rounded border-4 bg-grey-darker border-black">
+                    <img src="" alt="" class="absolute pin-t pin-l w-full h-full">
+                </div>
 
-            <div class="w-800 mx-auto">
+                <div class="flex items-start justify-around">
+                    <div class="w-1 bg-black h-2"></div>
+                    <div class="w-1 bg-black h-2"></div>
+                </div>
+                <div class="flex items-start justify-center">
+                    <div class="w-2/3 bg-black rounded-t h-2"></div>
+                </div>
+            </div>
+
+            <div class="w-800 mx-auto hidden lg:block">
 
                 <div class="relative w-full aspect-ratio-16/9 shadow-lg rounded border-8 bg-grey-darker border-black">
 
-                    {{-- <img src="{{ asset('/images/ctp_digi.jpeg') }}" class="absolute pin-t pin-l w-full h-full z-0 opacity-100"> --}}
-                    {{-- <img src="{{ asset('/images/digi_news.jpg') }}" class="absolute pin-t pin-l w-full h-full z-0 opacity-100"> --}}
-                    {{-- <div style="background-image: url({{ asset('/images/prelipceanu.jpg') }})" class="bg-cover absolute pin-t pin-l w-full h-full z-0 opacity-100"></div> --}}
-                    <div data-url="{{ asset('/images/digi_template.jpg') }}" style="background-image: url({{ asset('/images/digi_template.jpg') }})" ref="cover" class="bg-cover absolute pin-t pin-l w-full h-full z-0 opacity-100"></div>
-                    {{-- <img src="http://placeimg.com/720/480/nature" class="absolute pin-t pin-l w-full h-full z-0 opacity-100"> --}}
+                    <div data-url="{{ asset('/images/prelipceanu.jpg') }}" style="background-image: url({{ asset('/images/prelipceanu.jpg') }})" ref="cover" class="bg-cover absolute pin-t pin-l w-full h-full z-0 opacity-100"></div>
 
                     <div class="absolute pin-t pin-l w-full h-full z-10 px-10 pt-5 pb-6 flex flex-col justify-between">
                         {{-- top area --}}
@@ -189,25 +202,16 @@
                 
             </div>
 
-            <div class="w-full mx-auto mt-12 flex items-center justify-center font-sans">
+            <div class="w-full mx-auto mt-10 md:mt-16 flex items-center justify-center font-sans">
                 <a href="#" class="no-underline shadow-md bg-green-dark px-16 py-5 rounded-lg uppercase font-semibold text-white hover:shadow-lg hover:bg-green-darker">Download meme</a>
             </div>
 
-            <div class="w-full xl:w-2/3 mx-auto mt-12 hidden">
-
-                <div class="flex flex-wrap mb-6">
-
-                    
-                </div>
-
-                <div class="flex flex-col mb-6">
-                    <label class="font-semibold">Localitatea:</label>
-                    <input class="bg-grey-light mt-2 px-4 py-4 text-sm outline-none rounded-lg focus:shadow-inner" type="text" name="city" v-model="city">
-                </div>
-                
+            <div class="w-full mx-auto mt-6 flex items-center justify-center font-sans mx-auto" @click.stop>
+                <a href="#" class="no-underline text-sm tracking-tight text-grey-dark hover:text-blue-dark px-16 py-5 uppercase font-semibold " @click.prevent="toggleSidebar">Modifica</a>
             </div>
 
         </div>
 
     </div>
+
 @endsection

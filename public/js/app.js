@@ -33957,13 +33957,12 @@ var app = new Vue({
     isNewsAlert: false,
     isBreakingNews: false,
     isLive: true,
-    city: 'Cluj Napoca',
+    city: 'Timișoara',
     title: 'Ministrul Culturii despre Mihai Eminescu',
     subtitle: 'D. Breaz: E cel mai mare poet al României, cel puțin până acum',
     subnews: 'Oamenii cer dublarea salariilor și condiții mai bune',
     time: '20:21',
-    cover: '',
-    editModal: null
+    cover: ''
   },
   computed: {
     hasCity: function hasCity() {
@@ -33977,21 +33976,6 @@ var app = new Vue({
     }
   },
   methods: {
-    showEditModal: function showEditModal(section) {
-      var element = this.editModal.querySelector(section);
-      element.classList.remove('hidden');
-      this.editModal.classList.add('flex');
-      this.editModal.querySelector('input').focus();
-    },
-    hideEditModal: function hideEditModal() {
-      this.editModal.classList.remove('flex');
-      var elements = this.editModal.querySelectorAll('div');
-
-      for (i = 0; i < elements.length; i++) {
-        console.log(elements[i]);
-        elements[i].classList.add('hidden');
-      }
-    },
     toggleSidebar: function toggleSidebar() {
       var sidebar = document.querySelector('.sidebar');
       sidebar.classList.toggle('slideInRight');
@@ -34001,7 +33985,7 @@ var app = new Vue({
       }
 
       var main = document.querySelector('.main');
-      main.classList.toggle('mr-128');
+      main.classList.toggle('xl:mr-128');
       var body = document.querySelector('body');
       body.classList.toggle('overflow-hidden');
     },
@@ -34009,7 +33993,7 @@ var app = new Vue({
       var sidebar = document.querySelector('.sidebar');
       sidebar.classList.remove('slideInRight');
       var main = document.querySelector('.main');
-      main.classList.remove('mr-128');
+      main.classList.remove('xl:mr-128');
       var body = document.querySelector('body');
       body.classList.remove('overflow-hidden');
     },
@@ -34020,11 +34004,9 @@ var app = new Vue({
   mounted: function mounted() {
     var vm = this;
     this.cover = this.$refs.cover.dataset.url;
-    this.editModal = document.querySelector('.edit-modal');
     document.addEventListener('keydown', function (e) {
       if (e.keyCode == 27) {
-        vm.hideEditModal();
-        vm.closeSidebar();
+        vm.hideSidebar();
       }
     });
   }
@@ -34058,14 +34040,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * all outgoing HTTP requests automatically have it attached. This is just
  * a simple convenience so we don't have to attach every token manually.
  */
+// let token = document.head.querySelector('meta[name="csrf-token"]');
+// if (token) {
+//     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+// } else {
+//     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+// }
 
-var token = document.head.querySelector('meta[name="csrf-token"]');
-
-if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

@@ -16,8 +16,28 @@ class ScreenshotController extends Controller
         return view('build');
     }
 
+    public function show() 
+    {
+        $data = request()->validate([
+            'title'  => 'required|min:1|max:255',
+            'subtitle'  => 'required|min:1|max:255',
+            'subnews'  => 'required|min:1|max:255',
+            'time' => 'nullable',
+            'city' => 'nullable',
+            'live' => 'nullable',
+            'newsalert' => 'nullable',
+            'breakingnews' => 'nullable',
+            'cover' => 'nullable',
+        ]);
+        
+        return view('screenshot', compact('data'));
+    }
+
     public function store(Request $request) 
     {
-        dd($request);
+
+
+
+        return view('screenshot');
     }
 }

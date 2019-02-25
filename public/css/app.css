@@ -608,51 +608,9 @@ table {
   transition: margin .3s ease-in;
 }
 
-.sidebar {
-  right: -1000px;
-}
-
-.sidebar textarea {
-  resize: none;
-}
-
-@-webkit-keyframes bounceInRight {
-  from,
-  60%,
-  75%,
-  90%,
-  to {
-    -webkit-animation-timing-function: cubic-bezier(.215, .61, .355, 1);
-            animation-timing-function: cubic-bezier(.215, .61, .355, 1);
-  }
-
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(3000px, 0, 0);
-            transform: translate3d(3000px, 0, 0);
-  }
-
-  60% {
-    opacity: 1;
-    -webkit-transform: translate3d(-25px, 0, 0);
-            transform: translate3d(-25px, 0, 0);
-  }
-
-  75% {
-    -webkit-transform: translate3d(10px, 0, 0);
-            transform: translate3d(10px, 0, 0);
-  }
-
-  90% {
-    -webkit-transform: translate3d(-5px, 0, 0);
-            transform: translate3d(-5px, 0, 0);
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-}
+./*sidebar {
+	right: -1000px;
+}*/
 
 @keyframes bounceInRight {
   from,
@@ -757,8 +715,8 @@ table {
 }
 
 .slideInRight {
-          animation: slideInRight .6s forwards;
-  -webkit-animation: slideInRight .6s forwards;
+          animation: slideInRight .4s forwards;
+  -webkit-animation: slideInRight .4s forwards;
 }
 
 .list-reset {
@@ -6753,6 +6711,10 @@ table {
 
 .aspect-ratio-21\/9 {
   padding-top: 42.86%;
+}
+
+.sidebar textarea {
+  resize: none;
 }
 
 /**

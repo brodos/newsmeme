@@ -3,23 +3,30 @@
 @section('content')
 <div class="relative w-full aspect-ratio-16/9 bg-grey-darker">
 
-    <img src="{{ asset('/images/ctp_digi.jpeg') }}" class="absolute pin-t pin-l w-full h-full z-0 opacity-100">
+    <div data-url="{{ asset($data['cover'] ?? '/images/prelipceanu.jpg') }}" style="background-image: url({{ asset($data['cover'] ?? '/images/prelipceanu.jpg') }})" ref="cover" class="bg-cover absolute pin-t pin-l w-full h-full z-0 opacity-100"></div>
 
     <div class="absolute pin-t pin-l w-full h-full z-10 px-10 pt-5 pb-6 flex flex-col justify-between">
         {{-- top area --}}
         <div class="flex flex-col items-start font-fira">
             <div class="flex items-start">
-                <div class="bg-black w-18 text-center pb-px leading-none">
-                    <span class="text-white font-bold text-xs">{{ date('H:i') }}</span>
-                </div>
+                @if ($data['city'])
+                    <div class="bg-black w-18 text-center pb-px leading-none">
+                        <span class="text-white font-bold text-xs">{{ $data['time'] }}</span>
+                    </div>
+                @endif
 
-                <div class="city-gradient px-3 ml-2 text-center pb-px leading-none">
-                    <span class="text-white font-bold text-xs">Piatra Neamț</span>
+                @if ($data['city'])
+                    <div class="city-gradient px-3 ml-2 text-center pb-px leading-none">
+                        <span class="text-white font-bold text-xs">{{ $data['city'] }}</span>
+                    </div>
+                @endif
+            </div>
+
+            @if ($data['live'])
+                <div class="bg-grey-lightest  w-18 text-center pb-px mt-2 leading-none">
+                    <span class="text-black font-bold text-xs">direct</span>
                 </div>
-            </div>
-            <div class="bg-grey-lightest  w-18 text-center pb-px mt-2 leading-none">
-                <span class="text-black font-bold text-xs">direct</span>
-            </div>
+            @endif
         </div>
         {{-- end top area --}}
 
@@ -30,29 +37,35 @@
             </div>
             <div class="crawler flex-1 min-w-0 flex flex-col items-start ml-2">
                 
-                <div class="top-news-alert bg-red px-2 font-semibold text-center mb-2 text-white leading-normal" v-if="isBreakingNews" v-cloak>Breaking News</div>
-                <div class="top-news-alert bg-red px-2 font-semibold text-center mb-2 text-white leading-normal">News Alert</div>
+                @if (isset($data['breakingnews']) && $data['breakingnews'])
+                    <div class="top-news-alert bg-red px-2 font-semibold text-center mb-2 text-white leading-normal">Breaking News</div>
+                @elseif (isset($data['newsalert']) && $data['newsalert'])
+                    <div class="top-news-alert bg-red px-2 font-semibold text-center mb-2 text-white leading-normal">News Alert</div>
+                @endif
 
                 <div class="min-h-11 w-full mb-2 flex flex-col justify-center relative">
-                    <div class="title text-2-1/2xl px-2 pt-1 font-semibold text-white z-10 truncate" v-text="title">
-                        Ministrul Culturii despre Mihai Eminescu
+                    <div class="title text-2-1/2xl px-2 pt-1 font-semibold text-white z-10 truncate">
+                        {{ $data['title'] }}
                     </div>
-                    <div class="subtitle text-lg px-2 pb-1 text-grey-light mt-px pt-px z-10 truncate" v-text="subtitle">
-                        D. Breaz: E cel mai mare poet al României, cel puțin până acum
+                    <div class="subtitle text-lg px-2 pb-1 text-grey-light mt-px pt-px z-10 truncate">
+                        {{ $data['subtitle'] }}
                     </div>
                     <div class="absolute pin-y crawler-gradient w-full h-full z-0 opacity-90"></div>
                 </div>
 
                 <div class="w-full flex items-center justify-between leading-digi">
                     
-                    <span class="px-2 bg-red font-semibold text-center text-white" >
-                        News Alert
-                    </span>
-                    <span class="px-3 bg-digi font-semibold text-center text-white" v-else v-cloak>
-                        Știri
-                    </span>
-                    <span class="flex-1 bg-black w-full font-semibold text-grey-lighter pl-2 truncate" v-text="subnews">
-                        Oamenii cer dublarea salariilor și condiții mai bune
+                    @if (isset($data['newsalert']) && $data['newsalert'])
+                        <span class="px-2 bg-red font-semibold text-center text-white" >
+                            News Alert
+                        </span>
+                    @else
+                        <span class="px-3 bg-digi font-semibold text-center text-white">
+                            Știri
+                        </span>
+                    @endif
+                    <span class="flex-1 bg-black w-full font-semibold text-grey-lighter pl-2 truncate">
+                        {{ $data['subnews'] }}
                     </span>
 
                 </div>

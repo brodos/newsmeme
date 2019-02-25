@@ -48,13 +48,12 @@ const app = new Vue({
 		isNewsAlert: false,
 		isBreakingNews: false,
 		isLive: true,
-		city: 'Cluj Napoca',
+		city: 'Timișoara',
         title: 'Ministrul Culturii despre Mihai Eminescu',
         subtitle: 'D. Breaz: E cel mai mare poet al României, cel puțin până acum',
         subnews: 'Oamenii cer dublarea salariilor și condiții mai bune',
         time: '20:21',
         cover: '',
-        editModal: null,
 	},
     computed: {
         hasCity() {
@@ -68,24 +67,7 @@ const app = new Vue({
         }
     },
     methods: { 
-        showEditModal(section) {
-            var element = this.editModal.querySelector(section);
-            element.classList.remove('hidden');
-
-            this.editModal.classList.add('flex');
-            this.editModal.querySelector('input').focus();
-            
-        },
-        hideEditModal() {
-            this.editModal.classList.remove('flex');
-
-            var elements = this.editModal.querySelectorAll('div');
-
-            for (i = 0; i < elements.length; i++) {
-                console.log(elements[i]);
-                elements[i].classList.add('hidden');
-            }
-        },
+        
         toggleSidebar() {
             var sidebar = document.querySelector('.sidebar');
 
@@ -96,7 +78,7 @@ const app = new Vue({
             }
 
             var main = document.querySelector('.main');
-            main.classList.toggle('mr-128'); 
+            main.classList.toggle('xl:mr-128'); 
 
             var body = document.querySelector('body');
             body.classList.toggle('overflow-hidden');
@@ -106,7 +88,7 @@ const app = new Vue({
             sidebar.classList.remove('slideInRight');
 
             var main = document.querySelector('.main');
-            main.classList.remove('mr-128'); 
+            main.classList.remove('xl:mr-128'); 
 
             var body = document.querySelector('body');
             body.classList.remove('overflow-hidden');
@@ -119,12 +101,9 @@ const app = new Vue({
         let vm = this;
         this.cover = this.$refs.cover.dataset.url;
 
-        this.editModal = document.querySelector('.edit-modal');
-
         document.addEventListener('keydown', function(e) {
             if (e.keyCode == 27) {
-                vm.hideEditModal();
-                vm.closeSidebar();
+                vm.hideSidebar();
             }
         });
     }
