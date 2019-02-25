@@ -11,14 +11,14 @@
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 
-Route::get('/screenshot', function () {
-    return view('screenshot');
-});
-Route::get('/', function () {
-    return view('build');
-});
+// Route::get('/screenshot', function () {
+//     return view('screenshot');
+// });
+// Route::get('/', function () {
+//     return view('build');
+// });
 

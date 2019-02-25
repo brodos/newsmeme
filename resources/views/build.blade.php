@@ -2,22 +2,23 @@
 
 @section('content')
 
-    <div class="absolute pin-t pin-r text-right p-6 shadow-lg bg-white border-l-2 border-b-2">
-        <a href="#" @click.prevent="toggleSidebar" class="inline-block no-underline font-semibold  text-grey hover:text-grey-darker">
-            <svg class="fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="heroicon-ui" d="M9.3 8.7a1 1 0 0 1 1.4-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4-1.4l3.29-3.3-3.3-3.3z"/></svg>
+    <div class="absolute pin-t pin-r mt-12 mr-12 text-right font-sans">
+        <a href="#sidebar" @click.prevent="toggleSidebar" class="inline-block no-underline px-8 py-4 uppercase font-semibold text-grey-dark shadow-md bg-white border rounded-lg border-grey-dark hover:border-blue-dark hover:shadow-lg hover:text-blue-dark">
+            Modifică
+            {{-- <svg class="fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="heroicon-ui" d="M9.3 8.7a1 1 0 0 1 1.4-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4-1.4l3.29-3.3-3.3-3.3z"/></svg> --}}
         </a>
     </div>
 
     <div class="flex flex-row-reverse justify-between h-full pb-16" @click="hideSidebar">
 
         <div class="sidebar animate bg-white min-h-full w-128 shadow-lg z-20 fixed pin-t pin-r hidden bounceOutRight" @click.stop>
-            <div class="head flex items-center border-b">
+            <div class="head flex items-center border-b z-10 shadow">
                 <div class="p-6 border-r">
                     <a href="#" @click.prevent="toggleSidebar" class="text-grey hover:text-grey-darker leading-none">
                         <svg class="fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="heroicon-ui" d="M9.3 8.7a1 1 0 0 1 1.4-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4-1.4l3.29-3.3-3.3-3.3z"/></svg>
                     </a>
                 </div>
-                <div class="py-6 flex-1 text-center font-semibold uppercase text-indigo-dark">Modifica Meme</div>
+                <div class="p-6 pr-12 flex-1 font-semibold uppercase text-grey-darker">Modifică</div>
             </div>
             <div class="body p-10 overflow-y-scroll h-screen pb-32">
                 <div class="mb-4 flex w-full">
