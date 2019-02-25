@@ -33962,6 +33962,7 @@ var app = new Vue({
     subtitle: 'D. Breaz: E cel mai mare poet al României, cel puțin până acum',
     subnews: 'Oamenii cer dublarea salariilor și condiții mai bune',
     time: '20:21',
+    cover: '',
     editModal: null
   },
   computed: {
@@ -33990,14 +33991,40 @@ var app = new Vue({
         console.log(elements[i]);
         elements[i].classList.add('hidden');
       }
+    },
+    toggleSidebar: function toggleSidebar() {
+      var sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('slideInRight');
+
+      if (sidebar.classList.contains('hidden')) {
+        sidebar.classList.remove('hidden');
+      }
+
+      var main = document.querySelector('.main');
+      main.classList.toggle('mr-128');
+      var body = document.querySelector('body');
+      body.classList.toggle('overflow-hidden');
+    },
+    hideSidebar: function hideSidebar() {
+      var sidebar = document.querySelector('.sidebar');
+      sidebar.classList.remove('slideInRight');
+      var main = document.querySelector('.main');
+      main.classList.remove('mr-128');
+      var body = document.querySelector('body');
+      body.classList.remove('overflow-hidden');
+    },
+    updateCover: function updateCover() {
+      this.$refs.cover.style.backgroundImage = 'url(' + this.cover + ')';
     }
   },
   mounted: function mounted() {
     var vm = this;
+    this.cover = this.$refs.cover.dataset.url;
     this.editModal = document.querySelector('.edit-modal');
     document.addEventListener('keydown', function (e) {
       if (e.keyCode == 27) {
-        return vm.hideEditModal();
+        vm.hideEditModal();
+        vm.closeSidebar();
       }
     });
   }
@@ -34062,8 +34089,8 @@ if (token) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/miramar/apps/newsmeme/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/miramar/apps/newsmeme/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /Users/brodos/www/newsmeme/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/brodos/www/newsmeme/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

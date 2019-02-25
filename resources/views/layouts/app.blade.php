@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" class="min-h-full">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,13 +16,9 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-grey-lightest font-sans">
-
-    <h1 class="text-grey-darker text-center font-thin tracking-wide text-5xl my-16">
-        {{ config('app.name', 'Laravel') }}
-    </h1>
+<body class="bg-grey-lightest font-sans min-h-full">
     
-    <div class="content-wrapper" id="app">
+    <div class="content-wrapper min-h-full" id="app">
 
         @yield('content')
 

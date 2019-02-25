@@ -53,6 +53,7 @@ const app = new Vue({
         subtitle: 'D. Breaz: E cel mai mare poet al României, cel puțin până acum',
         subnews: 'Oamenii cer dublarea salariilor și condiții mai bune',
         time: '20:21',
+        cover: '',
         editModal: null,
 	},
     computed: {
@@ -84,16 +85,46 @@ const app = new Vue({
                 console.log(elements[i]);
                 elements[i].classList.add('hidden');
             }
+        },
+        toggleSidebar() {
+            var sidebar = document.querySelector('.sidebar');
+
+            sidebar.classList.toggle('slideInRight');
+            
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.classList.remove('hidden');    
+            }
+
+            var main = document.querySelector('.main');
+            main.classList.toggle('mr-128'); 
+
+            var body = document.querySelector('body');
+            body.classList.toggle('overflow-hidden');
+        },
+        hideSidebar() {
+            var sidebar = document.querySelector('.sidebar');
+            sidebar.classList.remove('slideInRight');
+
+            var main = document.querySelector('.main');
+            main.classList.remove('mr-128'); 
+
+            var body = document.querySelector('body');
+            body.classList.remove('overflow-hidden');
+        },
+        updateCover() {
+            this.$refs.cover.style.backgroundImage = 'url(' + this.cover + ')';
         }
     },
     mounted() {
         let vm = this;
+        this.cover = this.$refs.cover.dataset.url;
 
         this.editModal = document.querySelector('.edit-modal');
 
         document.addEventListener('keydown', function(e) {
             if (e.keyCode == 27) {
-                return vm.hideEditModal();
+                vm.hideEditModal();
+                vm.closeSidebar();
             }
         });
     }
