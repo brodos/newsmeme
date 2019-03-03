@@ -23,7 +23,8 @@ class TakeScreenshot extends Command
                                     {--live= : is it live?} 
                                     {--breakingnews= : is it breaking news?} 
                                     {--newsalert= : is it news alert?} 
-                                    {--cover= : cover for the news}';
+                                    {--cover= : cover for the news}
+                                    {--image_path= : where to save the image}';
 
     /**
      * The console command description.
@@ -63,13 +64,13 @@ class TakeScreenshot extends Command
         ];
 
         // build the screenshot path
-        $path = storage_path('app/public/screenshots/' . md5(time()) . '.png');
+        $path = $this->option('image_path');
         $screenshot = '--screenshot=' . $path;
 
         // build the url
         $url = route('screenshot') . '?' . http_build_query($data);
 
-
+        // take the screenshot
         $process = new Process([
             env('GOOGLE_CHROME_PATH', 'google-chrome'), 
             '--no-sandbox', 
@@ -77,36 +78,46 @@ class TakeScreenshot extends Command
             '--disable-gpu', 
             '--hide-scrollbars', 
             '--window-size=800,450', 
-            '--virtual-time-budget=3000', 
-	    $screenshot,
-	    $url,
+            // '--virtual-time-budget=3000', 
+            $screenshot,
+            $url,
     	]);
 
+        // get live updates
+        $process->run();
+	    // $process->run(function ($type, $buffer) {
+    	//     if (Process::ERR === $type) {
+     //            echo 'ERR > ' . $type . ': ' . $buffer . "\r\n";
+     //        } else {
+     //            echo 'OUT > ' .  $type . ': ' . $buffer . "\r\n";
+    	//     }
+	    // });
 
-	$process->run(function ($type, $buffer) {
-    		if (Process::ERR === $type) {
-        		echo 'ERR > '.$buffer;
-    		} else {
-        		echo 'OUT > '.$buffer;
-    		}
-	});
-
-	$process->wait();
-	$process->clearOutput();
-
-	$process = new Process(['chmod', '0660', $path]);
-	$process->run();
+        // handle process syncronous
+	    $process->wait();
 
         // executes after the command finishes
-        if (!$process->isSuccessful()) {
+        if (! $process->isSuccessful()) {
             $this->error('Screeshot was not taken');
             throw new ProcessFailedException($process);
-	}
+        }
 
-	$process->clearOutput();
+        // cleanup
+	    $process->clearOutput();
 
+        // set the right permission for the file
+	    $process = new Process(['chmod', '0660', $path]);
+	    $process->run();
 
-        $this->info($process->getOutput());
+        if (! $process->isSuccessful()) {
+            $this->error('Could not set the right permission to the file.');
+            throw new ProcessFailedException($process);
+        }
+
+        // cleanup
+	    $process->clearOutput();
+
+        // finish
         $this->info('Screenshot path: ' . $path);
     }    
 }

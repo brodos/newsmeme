@@ -4600,6 +4600,78 @@ table {
   opacity: 1;
 }
 
+.focus\:opacity-0:focus {
+  opacity: 0;
+}
+
+.focus\:opacity-25:focus {
+  opacity: .25;
+}
+
+.focus\:opacity-50:focus {
+  opacity: .5;
+}
+
+.focus\:opacity-75:focus {
+  opacity: .75;
+}
+
+.focus\:opacity-80:focus {
+  opacity: .8;
+}
+
+.focus\:opacity-85:focus {
+  opacity: .85;
+}
+
+.focus\:opacity-90:focus {
+  opacity: .9;
+}
+
+.focus\:opacity-95:focus {
+  opacity: .95;
+}
+
+.focus\:opacity-100:focus {
+  opacity: 1;
+}
+
+.active\:opacity-0:active {
+  opacity: 0;
+}
+
+.active\:opacity-25:active {
+  opacity: .25;
+}
+
+.active\:opacity-50:active {
+  opacity: .5;
+}
+
+.active\:opacity-75:active {
+  opacity: .75;
+}
+
+.active\:opacity-80:active {
+  opacity: .8;
+}
+
+.active\:opacity-85:active {
+  opacity: .85;
+}
+
+.active\:opacity-90:active {
+  opacity: .9;
+}
+
+.active\:opacity-95:active {
+  opacity: .95;
+}
+
+.active\:opacity-100:active {
+  opacity: 1;
+}
+
 .outline-none {
   outline: 0;
 }
@@ -10606,6 +10678,78 @@ table {
     opacity: 1;
   }
 
+  .sm\:focus\:opacity-0:focus {
+    opacity: 0;
+  }
+
+  .sm\:focus\:opacity-25:focus {
+    opacity: .25;
+  }
+
+  .sm\:focus\:opacity-50:focus {
+    opacity: .5;
+  }
+
+  .sm\:focus\:opacity-75:focus {
+    opacity: .75;
+  }
+
+  .sm\:focus\:opacity-80:focus {
+    opacity: .8;
+  }
+
+  .sm\:focus\:opacity-85:focus {
+    opacity: .85;
+  }
+
+  .sm\:focus\:opacity-90:focus {
+    opacity: .9;
+  }
+
+  .sm\:focus\:opacity-95:focus {
+    opacity: .95;
+  }
+
+  .sm\:focus\:opacity-100:focus {
+    opacity: 1;
+  }
+
+  .sm\:active\:opacity-0:active {
+    opacity: 0;
+  }
+
+  .sm\:active\:opacity-25:active {
+    opacity: .25;
+  }
+
+  .sm\:active\:opacity-50:active {
+    opacity: .5;
+  }
+
+  .sm\:active\:opacity-75:active {
+    opacity: .75;
+  }
+
+  .sm\:active\:opacity-80:active {
+    opacity: .8;
+  }
+
+  .sm\:active\:opacity-85:active {
+    opacity: .85;
+  }
+
+  .sm\:active\:opacity-90:active {
+    opacity: .9;
+  }
+
+  .sm\:active\:opacity-95:active {
+    opacity: .95;
+  }
+
+  .sm\:active\:opacity-100:active {
+    opacity: 1;
+  }
+
   .sm\:overflow-auto {
     overflow: auto;
   }
@@ -16559,6 +16703,78 @@ table {
   }
 
   .md\:hover\:opacity-100:hover {
+    opacity: 1;
+  }
+
+  .md\:focus\:opacity-0:focus {
+    opacity: 0;
+  }
+
+  .md\:focus\:opacity-25:focus {
+    opacity: .25;
+  }
+
+  .md\:focus\:opacity-50:focus {
+    opacity: .5;
+  }
+
+  .md\:focus\:opacity-75:focus {
+    opacity: .75;
+  }
+
+  .md\:focus\:opacity-80:focus {
+    opacity: .8;
+  }
+
+  .md\:focus\:opacity-85:focus {
+    opacity: .85;
+  }
+
+  .md\:focus\:opacity-90:focus {
+    opacity: .9;
+  }
+
+  .md\:focus\:opacity-95:focus {
+    opacity: .95;
+  }
+
+  .md\:focus\:opacity-100:focus {
+    opacity: 1;
+  }
+
+  .md\:active\:opacity-0:active {
+    opacity: 0;
+  }
+
+  .md\:active\:opacity-25:active {
+    opacity: .25;
+  }
+
+  .md\:active\:opacity-50:active {
+    opacity: .5;
+  }
+
+  .md\:active\:opacity-75:active {
+    opacity: .75;
+  }
+
+  .md\:active\:opacity-80:active {
+    opacity: .8;
+  }
+
+  .md\:active\:opacity-85:active {
+    opacity: .85;
+  }
+
+  .md\:active\:opacity-90:active {
+    opacity: .9;
+  }
+
+  .md\:active\:opacity-95:active {
+    opacity: .95;
+  }
+
+  .md\:active\:opacity-100:active {
     opacity: 1;
   }
 
@@ -22518,6 +22734,78 @@ table {
     opacity: 1;
   }
 
+  .lg\:focus\:opacity-0:focus {
+    opacity: 0;
+  }
+
+  .lg\:focus\:opacity-25:focus {
+    opacity: .25;
+  }
+
+  .lg\:focus\:opacity-50:focus {
+    opacity: .5;
+  }
+
+  .lg\:focus\:opacity-75:focus {
+    opacity: .75;
+  }
+
+  .lg\:focus\:opacity-80:focus {
+    opacity: .8;
+  }
+
+  .lg\:focus\:opacity-85:focus {
+    opacity: .85;
+  }
+
+  .lg\:focus\:opacity-90:focus {
+    opacity: .9;
+  }
+
+  .lg\:focus\:opacity-95:focus {
+    opacity: .95;
+  }
+
+  .lg\:focus\:opacity-100:focus {
+    opacity: 1;
+  }
+
+  .lg\:active\:opacity-0:active {
+    opacity: 0;
+  }
+
+  .lg\:active\:opacity-25:active {
+    opacity: .25;
+  }
+
+  .lg\:active\:opacity-50:active {
+    opacity: .5;
+  }
+
+  .lg\:active\:opacity-75:active {
+    opacity: .75;
+  }
+
+  .lg\:active\:opacity-80:active {
+    opacity: .8;
+  }
+
+  .lg\:active\:opacity-85:active {
+    opacity: .85;
+  }
+
+  .lg\:active\:opacity-90:active {
+    opacity: .9;
+  }
+
+  .lg\:active\:opacity-95:active {
+    opacity: .95;
+  }
+
+  .lg\:active\:opacity-100:active {
+    opacity: 1;
+  }
+
   .lg\:overflow-auto {
     overflow: auto;
   }
@@ -28471,6 +28759,78 @@ table {
   }
 
   .xl\:hover\:opacity-100:hover {
+    opacity: 1;
+  }
+
+  .xl\:focus\:opacity-0:focus {
+    opacity: 0;
+  }
+
+  .xl\:focus\:opacity-25:focus {
+    opacity: .25;
+  }
+
+  .xl\:focus\:opacity-50:focus {
+    opacity: .5;
+  }
+
+  .xl\:focus\:opacity-75:focus {
+    opacity: .75;
+  }
+
+  .xl\:focus\:opacity-80:focus {
+    opacity: .8;
+  }
+
+  .xl\:focus\:opacity-85:focus {
+    opacity: .85;
+  }
+
+  .xl\:focus\:opacity-90:focus {
+    opacity: .9;
+  }
+
+  .xl\:focus\:opacity-95:focus {
+    opacity: .95;
+  }
+
+  .xl\:focus\:opacity-100:focus {
+    opacity: 1;
+  }
+
+  .xl\:active\:opacity-0:active {
+    opacity: 0;
+  }
+
+  .xl\:active\:opacity-25:active {
+    opacity: .25;
+  }
+
+  .xl\:active\:opacity-50:active {
+    opacity: .5;
+  }
+
+  .xl\:active\:opacity-75:active {
+    opacity: .75;
+  }
+
+  .xl\:active\:opacity-80:active {
+    opacity: .8;
+  }
+
+  .xl\:active\:opacity-85:active {
+    opacity: .85;
+  }
+
+  .xl\:active\:opacity-90:active {
+    opacity: .9;
+  }
+
+  .xl\:active\:opacity-95:active {
+    opacity: .95;
+  }
+
+  .xl\:active\:opacity-100:active {
     opacity: 1;
   }
 

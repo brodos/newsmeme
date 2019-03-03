@@ -7,7 +7,6 @@
         bg-transparent border rounded-lg border-grey-dark hover:border-blue-dark hover:shadow-lg hover:text-blue-dark hover:bg-white text-sm leading-none flex items-center">
             <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z"/></svg>
             <span>Modifică</span>
-            
         </a>
     </div>
 
@@ -21,13 +20,13 @@
                     </a>
                 </div>
                 <div class="hidden md:block p-6 pr-12 flex-1 font-semibold uppercase text-grey-darker">Modifică</div>
-                <div class="p-6 flex-1 text-right md:hidden">
-                    <a href="#" class="no-underline bg-blue-dark rounded-lg text-white text-sm font-semibold px-8 shadow-md py-4">Modifică</a>
+                <div class="p-6 flex-1 text-right lg:hidden">
+                    <a href="#" @click.prevent="generateScreenshot" class="no-underline bg-blue-dark rounded-lg text-white text-sm font-semibold px-8 shadow-md py-4 hover:bg-blue-darker hover:shadow-lg focus:opacity-50 active:opacity-50">Modifică</a>
                 </div>
             </div>
-            <div class="body p-6 md:p-10 overflow-y-scroll h-screen pb-24">
-                <form action="{{ route('compose') }}" method="post">
-                    <input type="submit" value="submit">
+            <div class="body p-6 md:p-10 overflow-y-scroll h-screen pb-24 xl:pb-32">
+                <form action="{{ route('compose') }}" method="post" id="news-form">
+                    
                 <div class="mb-4 flex w-full">
                     <div class="flex-1 mr-2">
                         <input class="w-full bg-grey-lighter focus:bg-indigo-lightest h-12 px-4 appearance-none outline-none" type="time" name="time" v-model="time">
@@ -98,7 +97,7 @@
             
             <div class="w-full lg:hidden mx-auto p-6 md:p-10">
                 <div class="relative w-full aspect-ratio-16/9 shadow-lg rounded border-4 bg-grey-darker border-black">
-                    <img src="" alt="" class="absolute pin-t pin-l w-full h-full">
+                    <img src="{{ asset('/images/generic.jpg') }}" alt="NewsMeme.ro" class="generic-image absolute pin-t pin-l w-full h-full">
                 </div>
 
                 <div class="flex items-start justify-around">
@@ -202,16 +201,24 @@
                 
             </div>
 
-            <div class="w-full mx-auto mt-10 md:mt-16 flex items-center justify-center font-sans">
-                <a href="#" class="no-underline shadow-md bg-green-dark px-16 py-5 rounded-lg uppercase font-semibold text-white hover:shadow-lg hover:bg-green-darker">Download meme</a>
+            <div class="w-full mx-auto mt-10 md:mt-16 hidden lg:flex items-center justify-center font-sans" v-show="memeChanged">
+                <button @click.prevent="generateScreenshot" class="trigger-download no-underline appearance-none outline-none shadow-md bg-green-dark px-12 py-5 rounded-lg uppercase font-semibold text-white hover:shadow-lg hover:bg-green-darker flex items-center leading-none">
+                    <svg class="fill-current w-5 h-5 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 14.59V3a1 1 0 0 1 2 0v11.59l3.3-3.3a1 1 0 0 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 1.4-1.42l3.3 3.3zM3 17a1 1 0 0 1 2 0v3h14v-3a1 1 0 0 1 2 0v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3z"/></svg>
+                    <span>Download Meme</span>
+                </button>
             </div>
 
-            <div class="w-full mx-auto mt-6 flex items-center justify-center font-sans mx-auto" @click.stop>
-                <a href="#" class="no-underline text-sm tracking-tight text-grey-dark hover:text-blue-dark px-16 py-5 uppercase font-semibold " @click.prevent="toggleSidebar">Modifica</a>
+            <div class="w-full mx-auto mt-6 flex lg:hidden items-center justify-center font-sans" @click.stop>
+                <a href="#sidebar" @click.prevent="toggleSidebar" class="inline-block no-underline px-8 py-4 font-semibold text-grey-dark shadow-md 
+                    bg-transparent border rounded-lg border-grey-dark hover:border-blue-dark hover:shadow-lg hover:text-blue-dark hover:bg-white text-sm leading-none flex items-center">
+                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z"/></svg>
+                    <span>Modifică</span>
+                </a>
             </div>
 
         </div>
 
     </div>
 
+    <a href="#download" class="hidden download-newsmeme">Download</a>
 @endsection

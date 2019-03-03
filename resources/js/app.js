@@ -1,50 +1,13 @@
+window.axios = require('axios');
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-require('./bootstrap');
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.Vue = require('vue');
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-
-
-// let subtitle = document.querySelector('.subtitle');
-// let subtitle_input = document.querySelector('.subtitle-input');
-
-// let subnews = document.querySelector('.subnews');
-// let subnews_input = document.querySelector('.subnews-input');
-
-// title_input.classList.add('hidden');
-
-// let titlePopper = new Popper(title, title_input, {
-//     placement: 'top'
-// });
 
 const app = new Vue({
     el: '#app',
     data: {
+        baseHref: 'https://newsmeme.brodos.ro',
 		isNewsAlert: false,
 		isBreakingNews: false,
 		isLive: true,
@@ -54,6 +17,10 @@ const app = new Vue({
         subnews: 'Oamenii cer dublarea salariilor și condiții mai bune',
         time: '20:21',
         cover: '',
+        generatedImage: false,
+        downloadAction: null,
+        triggerDownload: null,
+        memeChanged: false,
 	},
     computed: {
         hasCity() {
@@ -69,7 +36,7 @@ const app = new Vue({
     methods: { 
         
         toggleSidebar() {
-            var sidebar = document.querySelector('.sidebar');
+            let sidebar = document.querySelector('.sidebar');
 
             sidebar.classList.toggle('slideInRight');
             
@@ -77,34 +44,95 @@ const app = new Vue({
                 sidebar.classList.remove('hidden');    
             }
 
-            var main = document.querySelector('.main');
+            let main = document.querySelector('.main');
             main.classList.toggle('xl:mr-128'); 
 
-            var body = document.querySelector('body');
+            let body = document.querySelector('body');
             body.classList.toggle('overflow-hidden');
         },
         hideSidebar() {
-            var sidebar = document.querySelector('.sidebar');
+            let sidebar = document.querySelector('.sidebar');
             sidebar.classList.remove('slideInRight');
 
-            var main = document.querySelector('.main');
+            let main = document.querySelector('.main');
             main.classList.remove('xl:mr-128'); 
 
-            var body = document.querySelector('body');
+            let body = document.querySelector('body');
             body.classList.remove('overflow-hidden');
         },
         updateCover() {
             this.$refs.cover.style.backgroundImage = 'url(' + this.cover + ')';
+        },
+        generateScreenshot() {
+            let vm = this;
+            let form = document.getElementById('news-form');
+            let data = new FormData(form);
+            let genericImage = document.querySelector('.generic-image');
+            this.triggerDownload.classList.add('opacity-50');
+
+            axios.post('/compose', data).then(function(response) {
+                    if (response.data.success === true) {
+                        // set the image
+                        genericImage.src = response.data.image_url;
+
+                        // let Vue know about the new image
+                        vm.generatedImage = response.data.image_url;
+
+                        // set the download button href
+                        vm.downloadAction.href = vm.baseHref + '/download/?f=' + response.data.image_url;
+
+                        vm.downloadAction.click();
+
+                        vm.triggerDownload.classList.remove('opacity-50');
+
+                        // hide the sidebar
+                        vm.hideSidebar();
+                        
+                    } else {
+                        alert('Eroare');
+                    }
+                    
+                }).catch(function(e) {
+                    alert(e);
+                });  
         }
     },
     mounted() {
         let vm = this;
         this.cover = this.$refs.cover.dataset.url;
+        this.downloadAction = document.querySelector('.download-newsmeme');
+        this.triggerDownload = document.querySelector('.trigger-download');
 
         document.addEventListener('keydown', function(e) {
             if (e.keyCode == 27) {
                 vm.hideSidebar();
             }
         });
+    },
+    watch: {
+        title() {
+            this.memeChanged = true;
+        },
+        subtitle() {
+            this.memeChanged = true;  
+        },
+        subnews() {
+            this.memeChanged = true;
+        },
+        isLive() {
+            this.memeChanged = true;
+        },
+        isNewsAlert() {
+            this.memeChanged = true;
+        },
+        isBreakingNews() {
+            this.memeChanged = true;
+        },
+        time() {
+            this.memeChanged = true;
+        },
+        city() {
+            this.memeChanged = true;
+        }
     }
 });
