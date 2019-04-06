@@ -26,8 +26,10 @@ class ScreenshotController extends Controller
      */
     public function show() 
     {
+	$server_ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+
         // only allow the server to access this page
-        if ($_SERVER['REMOTE_ADDR'] != '116.203.79.183') {
+        if ($server_ip != '116.203.79.183') {
             return redirect()->route('home');
         }
 
